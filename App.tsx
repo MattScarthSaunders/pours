@@ -5,113 +5,152 @@
  * @format
  */
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
+import React, {useState} from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
+  LayoutAnimation,
+  Platform,
+  Pressable,
   StyleSheet,
   Text,
-  useColorScheme,
+  UIManager,
   View,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
+import ListWithHeaders from './src/components/ListWithHeaders';
+import PourForm from './src/components/PourForm';
+import Header from './src/components/Header/Header';
 
 function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+  if (Platform.OS === 'android') {
+    if (UIManager.setLayoutAnimationEnabledExperimental) {
+      UIManager.setLayoutAnimationEnabledExperimental(true);
+    }
+  }
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+  const defaultFormData = [
+    {key: 'in', val: ''},
+    {key: 'out', val: ''},
+    {key: 'ratio', val: ''},
+    {key: 'grind', val: ''},
+    {key: 'time', val: ''},
+    {key: 'profile', val: ''},
+  ];
+
+  const [expanded, setExpanded] = useState(false);
+  const [formVisible, setFormVisible] = useState(false);
+  const [pourData, setPourData] = useState<{key: string; val: string}[][]>([]);
+  const [currentFormData, setCurrentFormData] =
+    useState<{key: string; val: string}[]>(defaultFormData);
+
+  const headers = [
+    {key: 'In(g)'},
+    {key: 'Out(g)'},
+    {key: 'Ratio'},
+    {key: 'Grind'},
+    {key: 'Time(s)'},
+    {key: 'Profile'},
+  ];
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
+    <>
+      <View>
+        <Header title="POURS" />
+        <ListWithHeaders headers={headers} data={pourData} />
+      </View>
+      {formVisible && (
+        <PourForm
+          headers={headers}
+          currentFormData={currentFormData}
+          setCurrentFormData={setCurrentFormData}
+        />
+      )}
+      {formVisible && (
+        <Pressable
+          style={styles.cancelButton}
+          onPress={() => {
+            if (formVisible) {
+              setCurrentFormData(defaultFormData);
+              setFormVisible(false);
+            } else {
+              setFormVisible(true);
+            }
+            LayoutAnimation.configureNext(
+              LayoutAnimation.Presets.easeInEaseOut,
+            );
+            setExpanded(!expanded);
           }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+          <Text style={styles.cancelButtonText}>Cancel</Text>
+        </Pressable>
+      )}
+      <Pressable
+        style={styles.addButton}
+        onPress={() => {
+          if (formVisible) {
+            setPourData(prev => {
+              const newData = [...prev];
+              newData.push([...currentFormData]);
+              return newData;
+            });
+            setCurrentFormData(defaultFormData);
+            setFormVisible(false);
+          } else {
+            setFormVisible(true);
+          }
+          LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+          setExpanded(!expanded);
+        }}>
+        <Text style={styles.addButtonText}>{formVisible ? 'Save' : '+'}</Text>
+      </Pressable>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  addButton: {
+    minWidth: 50,
+    minHeight: 50,
+    paddingHorizontal: 10,
+    alignSelf: 'center',
+    backgroundColor: 'black',
+    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontFamily: 'AtomicAge-Regular',
+    marginTop: 20,
+    position: 'absolute',
+    bottom: 5,
+    right: 5,
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+  addButtonText: {
+    color: 'white',
+    fontSize: 30,
+    paddingBottom: 5,
+    paddingRight: 2,
+    fontFamily: 'AtomicAge-Regular',
+    alignSelf: 'center',
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
+  cancelButton: {
+    minWidth: 50,
+    minHeight: 50,
+    paddingHorizontal: 10,
+    alignSelf: 'center',
+    backgroundColor: 'black',
+    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontFamily: 'AtomicAge-Regular',
+    marginTop: 20,
+    position: 'absolute',
+    bottom: 5,
+    left: 5,
   },
-  highlight: {
-    fontWeight: '700',
+  cancelButtonText: {
+    color: 'white',
+    fontSize: 30,
+    paddingBottom: 5,
+    paddingRight: 2,
+    fontFamily: 'AtomicAge-Regular',
+    alignSelf: 'center',
   },
 });
 
