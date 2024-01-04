@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 import ListWithHeaders from '../../components/ListWithHeaders';
 import PourForm from '../../components/PourForm';
-import Header from '../../components/Header/Header';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../../types';
@@ -83,19 +82,9 @@ function PourTable({navigation}: PourTableProps): React.JSX.Element {
   return (
     <>
       <View>
-        <Header title="POURS" />
         <ListWithHeaders headers={headers} data={pourData} />
       </View>
       <View style={styles.navigationContainer}>
-        <Pressable
-          style={[styles.navButtonCommonProps]}
-          onPress={() => {
-            stackNavigation.navigate('BeanList');
-          }}>
-          <Text style={[styles.navButtonTextCommonProps, styles.beanText]}>
-            Lazy Sunday
-          </Text>
-        </Pressable>
         {formVisible && (
           <PourForm
             headers={headers}
@@ -130,7 +119,7 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingHorizontal: 5,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'black',
   },
@@ -148,9 +137,6 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
     paddingRight: 2,
     fontFamily: 'AtomicAge-Regular',
-  },
-  beanText: {
-    color: 'orange',
   },
 });
 

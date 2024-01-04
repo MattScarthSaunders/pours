@@ -14,7 +14,7 @@ const ListItem = ({
   const inG = Number(dataItem[0].val);
   const outG = Number(dataItem[1].val);
   const numerator = inG ? 1 : 0;
-  const denominator = Math.round((outG / inG) * 10) / 10 || 0;
+  const denominator = inG ? Math.round((outG / inG) * 10) / 10 || 0 : 1;
 
   return (
     <View style={[styles.list, parentIndex % 2 !== 0 && styles.listItemOdd]}>
@@ -44,7 +44,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   listItemOdd: {
-    backgroundColor: 'beige',
+    backgroundColor: 'orange',
+    borderTopLeftRadius: 20,
+    borderBottomRightRadius: 20,
   },
 });
 

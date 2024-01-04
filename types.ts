@@ -1,5 +1,6 @@
 export type RootStackParamList = {
-  PourTable: undefined;
+  Home: undefined;
+  Pours: undefined;
   Profile: undefined;
-  BeanList: undefined;
+  Beans: undefined;
 };
