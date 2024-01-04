@@ -23,13 +23,18 @@ const PourForm = ({
     <View style={styles.formContainer}>
       <View style={styles.list}>
         {headers.map(header => {
-          return <Text style={styles.listItem}>{header.key}</Text>;
+          return (
+            <Text key={header.key + 'formheader'} style={styles.listItem}>
+              {header.key}
+            </Text>
+          );
         })}
       </View>
       <View style={styles.inputContainer}>
         {currentFormData.map((item, index) => {
           return (
             <TextInput
+              key={item.key + 'input'}
               keyboardType={item.key === 'profile' ? 'default' : 'numeric'}
               style={styles.inputBox}
               value={item.key === 'ratio' ? '-' : currentFormData[index].val}

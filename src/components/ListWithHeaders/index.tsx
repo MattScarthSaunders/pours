@@ -16,7 +16,11 @@ const ListWithHeaders = ({
     <View>
       <View style={styles.list}>
         {headers.map(header => {
-          return <Text style={styles.listItem}>{header.key}</Text>;
+          return (
+            <Text key={header.key + 'header'} style={styles.listItem}>
+              {header.key}
+            </Text>
+          );
         })}
       </View>
       <ScrollView>

@@ -1,15 +1,46 @@
-import React, {PropsWithChildren} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React, {PropsWithChildren, useEffect} from 'react';
+import {Pressable, StyleSheet, Text, View, NativeModules} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {DrawerNavigationProp, useDrawerStatus} from '@react-navigation/drawer';
+import {RootStackParamList} from '../../../types';
 
 type HeaderProps = PropsWithChildren<{
   title: string;
 }>;
 
 const Header = ({title}: HeaderProps): React.JSX.Element => {
+  useEffect(() => {
+    const {LocalNotificationsModule} = NativeModules;
+
+    console.log('Native module loaded:', LocalNotificationsModule);
+  }, []);
+
+  const drawerNavigation =
+    useNavigation<DrawerNavigationProp<RootStackParamList>>();
+
+  const isDrawerOpen = useDrawerStatus() === 'open';
+
+  const onPressHandler = () => {
+    if (isDrawerOpen) {
+      drawerNavigation.closeDrawer();
+    } else {
+      // drawerNavigation.openDrawer();
+      const {LocalNotificationsModule} = NativeModules;
+
+      console.log('launching notification...');
+      LocalNotificationsModule.showLocalNotification(
+        'Pours',
+        'GET YO SELF SOME BEEEEEANS!',
+      );
+    }
+  };
+
   return (
     <View style={styles.HeaderContainer}>
       <Text style={styles.ListWithHeadersTitle}>{title}</Text>
-      <Text style={styles.ListWithHeadersBeans}>Lazy Sunday</Text>
+      <Pressable onPress={onPressHandler}>
+        <Text style={styles.ListWithHeadersBeans}>Lazy Sunday</Text>
+      </Pressable>
     </View>
   );
 };
