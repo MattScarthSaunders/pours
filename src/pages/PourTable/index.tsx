@@ -16,11 +16,11 @@ import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../../types';
 import {DrawerContentComponentProps} from '@react-navigation/drawer';
-type HomeProps = PropsWithChildren<{
+type PourTableProps = PropsWithChildren<{
   navigation: DrawerContentComponentProps;
 }>;
 
-function Home({navigation}: HomeProps): React.JSX.Element {
+function PourTable({navigation}: PourTableProps): React.JSX.Element {
   if (Platform.OS === 'android') {
     if (UIManager.setLayoutAnimationEnabledExperimental) {
       UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -90,9 +90,11 @@ function Home({navigation}: HomeProps): React.JSX.Element {
         <Pressable
           style={[styles.navButtonCommonProps]}
           onPress={() => {
-            stackNavigation.navigate('Profile');
+            stackNavigation.navigate('BeanList');
           }}>
-          <Text style={[styles.navButtonTextCommonProps]}>Profile</Text>
+          <Text style={[styles.navButtonTextCommonProps, styles.beanText]}>
+            Lazy Sunday
+          </Text>
         </Pressable>
         {formVisible && (
           <PourForm
@@ -142,11 +144,14 @@ const styles = StyleSheet.create({
   },
   navButtonTextCommonProps: {
     color: 'white',
-    fontSize: 30,
+    fontSize: 25,
     paddingBottom: 5,
     paddingRight: 2,
     fontFamily: 'AtomicAge-Regular',
   },
+  beanText: {
+    color: 'orange',
+  },
 });
 
-export default Home;
+export default PourTable;

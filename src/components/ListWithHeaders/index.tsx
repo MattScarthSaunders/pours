@@ -43,9 +43,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     borderBottomWidth: 1,
   },
-
   listItem: {
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: '400',
     fontFamily: 'AtomicAge-Regular',
     textAlign: 'center',

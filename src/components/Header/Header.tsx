@@ -3,45 +3,39 @@ import {Pressable, StyleSheet, Text, View, NativeModules} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {DrawerNavigationProp, useDrawerStatus} from '@react-navigation/drawer';
 import {RootStackParamList} from '../../../types';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 type HeaderProps = PropsWithChildren<{
   title: string;
 }>;
 
 const Header = ({title}: HeaderProps): React.JSX.Element => {
-  useEffect(() => {
-    const {LocalNotificationsModule} = NativeModules;
-
-    console.log('Native module loaded:', LocalNotificationsModule);
-  }, []);
-
   const drawerNavigation =
     useNavigation<DrawerNavigationProp<RootStackParamList>>();
 
-  const isDrawerOpen = useDrawerStatus() === 'open';
-
   const onPressHandler = () => {
-    if (isDrawerOpen) {
-      drawerNavigation.closeDrawer();
-    } else {
-      drawerNavigation.openDrawer();
+    drawerNavigation.openDrawer();
 
-      // NATIVE MODULES! We did it! Make sure NativeModules is imported from 'react-native'.
+    // NATIVE MODULES! We did it! Make sure NativeModules is imported from 'react-native' then do below.
 
-      // const {LocalNotificationsModule} = NativeModules;
+    // const {LocalNotificationsModule} = NativeModules;
 
-      // LocalNotificationsModule.showLocalNotification(
-      //   'Pours',
-      //   'GET YO SELF SOME BEEEEEANS!',
-      // );
-    }
+    // LocalNotificationsModule.showLocalNotification(
+    //   'Pours',
+    //   'GET YO SELF SOME BEEEEEANS!',
+    // );
   };
 
   return (
     <View style={styles.HeaderContainer}>
       <Text style={styles.ListWithHeadersTitle}>{title}</Text>
       <Pressable onPress={onPressHandler}>
-        <Text style={styles.ListWithHeadersBeans}>Lazy Sunday</Text>
+        <Icon
+          name="list"
+          size={35}
+          color="orange"
+          style={styles.ListWithHeadersBeans}
+        />
       </Pressable>
     </View>
   );
@@ -53,22 +47,17 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor: 'black',
     width: '100%',
+    height: 45,
   },
   ListWithHeadersTitle: {
     fontSize: 35,
-    height: 50,
     fontFamily: 'AtomicAge-Regular',
     color: 'white',
     backgroundColor: 'black',
-    paddingTop: 2,
   },
   ListWithHeadersBeans: {
-    fontSize: 25,
-    fontFamily: 'AtomicAge-Regular',
-    color: 'orange',
-    backgroundColor: 'black',
-    alignSelf: 'flex-end',
-    paddingBottom: 5,
+    marginTop: 5,
+    marginRight: 5,
   },
 });
 export default Header;
