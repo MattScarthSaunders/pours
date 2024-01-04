@@ -24,14 +24,16 @@ const Header = ({title}: HeaderProps): React.JSX.Element => {
     if (isDrawerOpen) {
       drawerNavigation.closeDrawer();
     } else {
-      // drawerNavigation.openDrawer();
-      const {LocalNotificationsModule} = NativeModules;
+      drawerNavigation.openDrawer();
 
-      console.log('launching notification...');
-      LocalNotificationsModule.showLocalNotification(
-        'Pours',
-        'GET YO SELF SOME BEEEEEANS!',
-      );
+      // NATIVE MODULES! We did it! Make sure NativeModules is imported from 'react-native'.
+
+      // const {LocalNotificationsModule} = NativeModules;
+
+      // LocalNotificationsModule.showLocalNotification(
+      //   'Pours',
+      //   'GET YO SELF SOME BEEEEEANS!',
+      // );
     }
   };
 

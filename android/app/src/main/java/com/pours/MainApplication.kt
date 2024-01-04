@@ -18,6 +18,12 @@ class MainApplication : Application(), ReactApplication {
       object : DefaultReactNativeHost(this) {
         override fun getPackages(): List<ReactPackage> {
           // Packages that cannot be autolinked yet can be added manually here, for example:
+
+          // NATIVE MODULES INFO!
+          // 
+          // Append the package created in PoursPackage.java here, as below or by any other means.
+          // So long as it is appended to the packages list, you're gucci. Then you implement it as shown in the
+          // 'Header' react native component.
           return PackageList(this).packages + PoursPackage()
         }
 
