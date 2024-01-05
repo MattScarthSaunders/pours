@@ -1,0 +1,18 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Android",
+      "cwd": "${workspaceFolder}",
+      "type": "reactnative",
+      "request": "launch",
+      "platform": "android",
+      "logCatArguments": [
+        "-s",
+        "ReactNativeJS:V",
+        "ReactNative:V",
+        "ReactNativeBleManager:V"
+      ]
+    }
+  ]
+}

@@ -62,7 +62,7 @@ const DrawerNav = () => {
       screenOptions={{
         headerShown: false,
       }}>
-      <Drawer.Screen name="Home" component={StackNav} />
+      <Drawer.Screen name="Home2" component={StackNav} />
     </Drawer.Navigator>
   );
 };

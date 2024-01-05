@@ -1,4 +1,4 @@
-import React, {PropsWithChildren, useState} from 'react';
+import React, {PropsWithChildren, useEffect, useState} from 'react';
 import {
   Button,
   LayoutAnimation,
@@ -8,18 +8,22 @@ import {
   Text,
   UIManager,
   View,
+  NativeModules,
 } from 'react-native';
 import ListWithHeaders from '../../components/ListWithHeaders';
 import PourForm from '../../components/PourForm';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, RouteProp} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../../types';
 import {DrawerContentComponentProps} from '@react-navigation/drawer';
 type PourTableProps = PropsWithChildren<{
   navigation: DrawerContentComponentProps;
+  route: RouteProp<RootStackParamList, 'Pours'>;
 }>;
 
-function PourTable({navigation}: PourTableProps): React.JSX.Element {
+function PourTable({route, navigation}: PourTableProps): React.JSX.Element {
+  const {beanTitle} = route.params;
+
   if (Platform.OS === 'android') {
     if (UIManager.setLayoutAnimationEnabledExperimental) {
       UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -48,20 +52,39 @@ function PourTable({navigation}: PourTableProps): React.JSX.Element {
   const [formVisible, setFormVisible] = useState(false);
   const [pourData, setPourData] = useState<{key: string; val: string}[][]>([]);
   const [currentFormData, setCurrentFormData] = useState(defaultFormData);
+  const {LocalNotificationsModule, LocalStorageModule} = NativeModules;
 
-  const stackNavigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  useEffect(() => {
+    console.log(beanTitle);
+    LocalStorageModule.readFile(
+      beanTitle,
+      (contents: string) => {
+        console.log('PourTable UseEffect', contents);
+        setPourData(JSON.parse(contents) || []);
+      },
+      (error: string) => {
+        if (error) setPourData([]);
+      },
+    );
+  }, []);
 
   const handleSaveClick = () => {
     if (formVisible) {
       setPourData(prev => {
         const newData = [...prev];
         newData.push([...currentFormData]);
+        LocalStorageModule.saveFile(beanTitle, JSON.stringify(newData));
         return newData;
       });
       setCurrentFormData(defaultFormData);
+
       setFormVisible(false);
     } else {
+      // LocalNotificationsModule.showLocalNotification(
+      //   'Ohhh, a new drink, aye?',
+      //   'Tap me and get on with it',
+      // );
+
       setFormVisible(true);
     }
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);

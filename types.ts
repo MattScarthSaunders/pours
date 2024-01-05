@@ -1,6 +1,7 @@
 export type RootStackParamList = {
   Home: undefined;
-  Pours: undefined;
+  Home2: undefined;
+  Pours: {beanTitle: string};
   Profile: undefined;
   Beans: undefined;
 };

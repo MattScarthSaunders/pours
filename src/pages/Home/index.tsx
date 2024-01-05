@@ -5,7 +5,12 @@ type HomeProps = {};
 const Home: React.FC<HomeProps> = () => {
   return (
     <View>
-      <Text>Home View Here</Text>
+      <Text>
+        This app is vastly overengineer for what it does, It's basically just
+        forms, tables and memory. It has a bunch of extra features it doesn't
+        need, because it is a playground to learn React Native. Now stop
+        thinking about it and use the menu to select the only available page.
+      </Text>
     </View>
   );
 };

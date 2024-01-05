@@ -57,7 +57,7 @@ public class LocalNotificationsModule extends ReactContextBaseJavaModule {
 
         // Show the notification, the first argument should be a unique ID.
         notificationManager.notify(11231251, builder.build());
-
+        
         // Next is to set this module as a package in PoursPackage.java...
     }
 }

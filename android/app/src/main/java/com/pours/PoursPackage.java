@@ -25,6 +25,8 @@ public class PoursPackage implements ReactPackage {
     
     // basically, just add any new modules for the app here, like this...
        modules.add(new LocalNotificationsModule(reactContext));
+       modules.add(new LocalStorageModule(reactContext));
+
 
        return modules;
    }

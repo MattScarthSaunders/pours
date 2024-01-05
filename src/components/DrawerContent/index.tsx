@@ -9,18 +9,14 @@ import {StyleSheet, View} from 'react-native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../../types';
 
-const DrawerList: DrawerLayoutProps[] = [
-  {icon: 'coffee', label: 'Pours', navigateTo: 'Pours'},
-  {icon: 'circle', label: 'Beans', navigateTo: 'Beans'},
-];
+const DrawerList: DrawerLayoutProps[] = [{icon: 'circle', label: 'Beans'}];
 
 type DrawerLayoutProps = {
   icon: string;
   label: string;
-  navigateTo: 'Home' | 'Pours' | 'Beans';
 };
 
-const DrawerLayout = ({icon, label, navigateTo}: DrawerLayoutProps) => {
+const DrawerLayout = ({icon, label}: DrawerLayoutProps) => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
@@ -31,21 +27,14 @@ const DrawerLayout = ({icon, label, navigateTo}: DrawerLayoutProps) => {
       )}
       label={label}
       onPress={() => {
-        navigation.navigate(navigateTo);
+        navigation.navigate('Beans');
       }}></DrawerItem>
   );
 };
 
 const DrawerItems = () => {
   return DrawerList.map((el, i) => {
-    return (
-      <DrawerLayout
-        key={i}
-        icon={el.icon}
-        label={el.label}
-        navigateTo={el.navigateTo}
-      />
-    );
+    return <DrawerLayout key={i} icon={el.icon} label={el.label} />;
   });
 };
 
