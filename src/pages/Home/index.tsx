@@ -5,15 +5,22 @@ type HomeProps = {};
 const Home: React.FC<HomeProps> = () => {
   return (
     <View>
-      <Text>
-        This app is vastly overengineer for what it does, It's basically just
+      <Text style={styles.HomeText}>
+        This app is vastly overengineered for what it does. It's basically just
         forms, tables and memory. It has a bunch of extra features it doesn't
-        need, because it is a playground to learn React Native. Now stop
-        thinking about it and use the menu to select the only available page.
+        need, because it is a playground to learn React Native. Now disengage
+        your brain and use the menu to select the only available page.
       </Text>
     </View>
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  HomeText: {
+    fontSize: 30,
+    textAlign: 'center',
+    paddingHorizontal: 10,
+    paddingTop: 10,
+  },
+});
 export default Home;

@@ -55,11 +55,9 @@ function PourTable({route, navigation}: PourTableProps): React.JSX.Element {
   const {LocalNotificationsModule, LocalStorageModule} = NativeModules;
 
   useEffect(() => {
-    console.log(beanTitle);
     LocalStorageModule.readFile(
       beanTitle,
       (contents: string) => {
-        console.log('PourTable UseEffect', contents);
         setPourData(JSON.parse(contents) || []);
       },
       (error: string) => {

@@ -24,7 +24,6 @@ function BeanList(): React.JSX.Element {
     LocalStorageModule.readFile(
       'beanList',
       (contents: string) => {
-        console.log('BeanList UseEffect', contents);
         setAvailableBeans(JSON.parse(contents));
       },
       (err: string) => {
