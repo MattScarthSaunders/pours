@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingHorizontal: 10,
     paddingTop: 10,
+    color: 'black',
   },
 });
 export default Home;

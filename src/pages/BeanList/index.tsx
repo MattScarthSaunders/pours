@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {
-  Button,
   NativeModules,
   Pressable,
   ScrollView,
@@ -166,6 +165,7 @@ const styles = StyleSheet.create({
   BeanTitle: {
     fontSize: 30,
     fontFamily: 'AtomicAge-Regular',
+    color: 'black',
     backgroundColor: 'orange',
     borderTopLeftRadius: 25,
     borderBottomRightRadius: 25,
@@ -214,6 +214,7 @@ const styles = StyleSheet.create({
   BeanFormButtonText: {
     fontSize: 30,
     fontFamily: 'AtomicAge-Regular',
+    color: 'black',
   },
   BeanInputFormButtonContainer: {
     width: '100%',
@@ -225,6 +226,7 @@ const styles = StyleSheet.create({
     height: 45,
     borderColor: 'black',
     borderWidth: 1,
+    color: 'black',
   },
 });
 export default BeanList;

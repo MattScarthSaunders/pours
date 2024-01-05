@@ -1,6 +1,5 @@
 import React, {PropsWithChildren, useEffect, useState} from 'react';
 import {
-  Button,
   LayoutAnimation,
   Platform,
   Pressable,
@@ -12,8 +11,7 @@ import {
 } from 'react-native';
 import ListWithHeaders from '../../components/ListWithHeaders';
 import PourForm from '../../components/PourForm';
-import {useNavigation, RouteProp} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RouteProp} from '@react-navigation/native';
 import {RootStackParamList} from '../../../types';
 import {DrawerContentComponentProps} from '@react-navigation/drawer';
 type PourTableProps = PropsWithChildren<{

@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     borderRightColor: 'white',
     borderRightWidth: 1,
     fontSize: 20,
+    color: 'black',
   },
   listItemOdd: {
     backgroundColor: 'orange',

@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
     fontFamily: 'AtomicAge-Regular',
     textAlign: 'center',
     flex: 1,
+    color: 'black',
   },
 });
 

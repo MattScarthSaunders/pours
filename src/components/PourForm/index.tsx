@@ -64,6 +64,7 @@ const styles = StyleSheet.create({
     fontFamily: 'AtomicAge-Regular',
     textAlign: 'center',
     flex: 1,
+    color: 'black',
   },
   inputContainer: {
     flexDirection: 'row',
@@ -76,6 +77,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     flex: 1,
     backgroundColor: 'white',
+    color: 'black',
   },
 });
 
