@@ -172,7 +172,6 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 25,
     paddingLeft: 10,
     paddingRight: 10,
-    height: '100%',
     borderWidth: 1,
   },
   BeanDeleteButton: {
