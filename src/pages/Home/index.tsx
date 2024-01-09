@@ -5,7 +5,7 @@ type HomeProps = {};
 const Home: React.FC<HomeProps> = () => {
   return (
     <View>
-      <Text style={styles.HomeText}>
+      <Text style={styles.HomeText} testID="homeTextTest">
         This app is vastly overengineered for what it does. It's basically just
         forms, tables and memory. It has a bunch of extra features it doesn't
         need, because it is a playground to learn React Native. Now disengage

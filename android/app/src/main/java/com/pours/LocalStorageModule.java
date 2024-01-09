@@ -42,9 +42,8 @@ public class LocalStorageModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void saveFile(String filename, String fileContents) {
         try {
-            try (FileOutputStream fos = context.openFileOutput(filename, Context.MODE_PRIVATE)) {
-                fos.write(fileContents.getBytes(StandardCharsets.UTF_8));
-            }
+            FileOutputStream fos = context.openFileOutput(filename, Context.MODE_PRIVATE);
+            fos.write(fileContents.getBytes(StandardCharsets.UTF_8));
         } catch (FileNotFoundException e) {
             Log.e("ReactNative", "File not found: " + e.getMessage());
         } catch (IOException e) {
@@ -62,14 +61,15 @@ public class LocalStorageModule extends ReactContextBaseJavaModule {
     
             StringBuilder stringBuilder = new StringBuilder();
     
-            try (BufferedReader reader = new BufferedReader(inputStreamReader)) {
-                String line = reader.readLine();
-                while (line != null) {
-                    stringBuilder.append(line).append('\n');
-                    line = reader.readLine();
-                }
+            BufferedReader reader = new BufferedReader(inputStreamReader);
+
+            String line = reader.readLine();
+
+            while (line != null) {
+                stringBuilder.append(line).append('\n');
+                line = reader.readLine();
             }
-    
+            
             String contents = stringBuilder.toString();
             successCallback.invoke(contents);
         } catch (FileNotFoundException e) {
