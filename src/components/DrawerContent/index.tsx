@@ -22,6 +22,7 @@ const DrawerLayout = ({icon, label}: DrawerLayoutProps) => {
 
   return (
     <DrawerItem
+      testID={label + 'LabelTest'}
       icon={({color, size}) => (
         <Icon name={icon} color={color} size={size}></Icon>
       )}

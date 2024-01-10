@@ -41,6 +41,7 @@ const StackNav = () => {
                 name="menu"
                 size={30}
                 color="white"
+                testID="menuButtonTest"
                 onPress={() =>
                   navigation.dispatch(DrawerActions.openDrawer())
                 }></Icon>
